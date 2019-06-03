@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: kabanero-validate-install
+spec:
+  steps:
+    - name: echo-hello
+      image: docker.io/ubuntu
+      command:
+        - /bin/sh
+      args:
+        - -c 
+        - "echo  This is a default Kabanero pipeline. Tekton is working." 
+    - name: git-ops-validate
+      image: docker.io/ubuntu
+      command:
+        - /bin/sh
+      args:
+        - -c
+        - "ls -al"
