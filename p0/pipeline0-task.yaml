@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: kabanero-razee-deploy-task
+  name: pipeline0-task
 spec:
   inputs:
     resources:
@@ -15,18 +15,11 @@ spec:
       description: The directory from which resources are to be applied
       default: ""
   steps:
-  - name: razee-deploy
-    image: docker.io/ubuntu
+  - name: kubectl-apply
+    image: lachlanevenson/k8s-kubectl
     command:
-    - /bin/sh
+    - kubectl
     args:
     - apply
     - -f
     - ${inputs.params.pathToResourceFiles}/${inputs.params.apply-directory}
-  - name: razee-deploy-verify
-    image: docker.io/ubuntu
-    command:
-    - /bin/sh
-    args: 
-    - -c
-    - echo Razee hack here ${inputs.params.pathToResourceFiles}/${inputs.params.apply-directory}
