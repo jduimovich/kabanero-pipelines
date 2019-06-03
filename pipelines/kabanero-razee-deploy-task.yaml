@@ -1,0 +1,42 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: kabanero-razee-deploy-task
+spec:
+  inputs:
+    resources:
+    - name: git-source
+      type: git
+    params:
+    - name: pathToResourceFiles
+      description: The path to the resource files to apply
+      default: /workspace/git-source
+    - name: apply-directory
+      description: The directory from which resources are to be applied
+      default: ""
+  steps:
+  - name: razee-deploy
+    image: docker.io/ubuntu
+    command:
+    - /bin/sh
+    args:
+    - apply
+    - -f
+    - ${inputs.params.pathToResourceFiles}/${inputs.params.apply-directory}
+  - name:  
+      image: docker.io/ubuntu
+      command:
+        - /bin/sh
+      args:
+        - -c
+        - "ls -al"
+        - ${inputs.params.pathToResourceFiles}/${inputs.params.apply-directory}
+  - name:  
+      image: docker.io/ubuntu
+      command:
+        - /bin/sh
+      args:
+        - -c
+        - "echo Applying the resource from here: "
+        - ${inputs.params.pathToResourceFiles}/${inputs.params.apply-directory}
+        
