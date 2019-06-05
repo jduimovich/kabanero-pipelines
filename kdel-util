@@ -1,5 +1,5 @@
 echo Deleting all $1
-kubectl get $1 -n default --no-headers=true | cut -d ' ' -f1  |  xargs  kubectl delete $1
+kubectl get $1 -n default --no-headers=true | cut -d ' ' -f1  | grep -v pipeline0 | xargs  kubectl delete $1
 
 
 
