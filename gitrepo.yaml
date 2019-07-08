@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: champ-git-repo
+  namespace: default
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/jduimovich/champ-config.git 
+    - name: revision
+      value: master
