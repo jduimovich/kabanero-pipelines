@@ -1,22 +1,24 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: pipeline0
+  name: kabanero-install-pipelines
 spec:
   resources:
   - name: git-source
     type: git
+  - name: docker-image
+    type: image
   params:
   - name: pathToResourceFiles
     description: The path to the resource files to apply
     default: /workspace/git-source
   - name: apply-directory
     description: The directory from which resources are to be applied
-    default: ""
+    default: "pipelines"
   tasks:
-  - name: pipeline0-task
+  - name: kabanero-install-pipelines-task
     taskRef:
-      name: pipeline0-task
+      name: kabanero-install-pipelines-task
     params:
     - name: pathToResourceFiles
       value: ${params.pathToResourceFiles}

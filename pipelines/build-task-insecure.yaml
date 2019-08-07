@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: build-credential-push
+  name: build-push
 spec:
   inputs:
     resources:
@@ -19,6 +19,13 @@ spec:
       - name: builtImage
         type: image
   steps:
+  - name: show-image-name
+    image: docker.io/ubuntu
+    command: ['/bin/bash'] 
+    args: ['-c', 'echo build-push $IMG'] 
+    env:
+      - name: IMG
+        value: ${outputs.resources.builtImage.url}
   - name: build
     image: docker
     command:
@@ -36,10 +43,10 @@ spec:
   - name: push 
     image: docker
     command:
-    - sh 
+    - docker 
     args:
-    - -c
-    - "docker push ${outputs.resources.builtImage.url}"
+    - 'push'
+    - ${outputs.resources.builtImage.url}
     volumeMounts:
     - name: docker-socket
       mountPath: /var/run/docker.sock
@@ -48,5 +55,3 @@ spec:
       hostPath:
         path: /var/run/docker.sock
         type: Socket
-
-

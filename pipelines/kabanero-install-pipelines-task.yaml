@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: kabanero-direct-deploy-task
+  name: kabanero-install-pipelines-task
 spec:
   inputs:
     resources:
@@ -13,7 +13,7 @@ spec:
       default: /workspace/git-source
     - name: apply-directory
       description: The directory from which resources are to be applied
-      default: ""
+      default: "pipelines"
   steps:
   - name: kubectl-apply
     image: lachlanevenson/k8s-kubectl

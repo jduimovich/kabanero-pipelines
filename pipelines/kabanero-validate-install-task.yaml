@@ -4,17 +4,38 @@ metadata:
   name: kabanero-validate-install
 spec:
   steps:
-    - name: echo-hello
+    - name: echo-step-1
       image: docker.io/ubuntu
       command:
         - /bin/sh
       args:
         - -c 
         - "echo  This is a default Kabanero pipeline. Tekton is working." 
-    - name: git-ops-validate
+    - name: echo-step-2
+      image: docker.io/ubuntu
+      command:
+        - /bin/sh
+      args:
+        - -c 
+        - "echo  This pipeline only runs simple ls -al on the local directory." 
+    - name: echo-step-3-ls-al
       image: docker.io/ubuntu
       command:
         - /bin/sh
       args:
         - -c
         - "ls -al"
+    - name: echo-step-4-pwd
+      image: docker.io/ubuntu
+      command:
+        - /bin/sh
+      args:
+        - -c
+        - "pwd"
+    - name: echo-step-5-ls-al
+      image: docker.io/ubuntu
+      command:
+        - /bin/sh
+      args:
+        - -c 
+        - "echo  Final Step in pipeline. Tekton is working." 

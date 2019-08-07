@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: build-push-insecure
+  name: mvn-build-push
 spec:
   inputs:
     resources:
@@ -19,6 +19,10 @@ spec:
       - name: builtImage
         type: image
   steps:
+  - name: run-maven-build
+    image: jduimovich/mavenbuild
+    command: ['bash']
+    args: ['/script.sh'] 
   - name: build
     image: docker
     command:

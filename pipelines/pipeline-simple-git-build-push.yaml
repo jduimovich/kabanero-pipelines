@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: simple-pipeline
+  name: simple-git-build-push
 spec:
   resources: 
   - name: git-source
@@ -29,4 +29,3 @@ spec:
         resource: git-source 
       - name: image-out
         resource: docker-image
-

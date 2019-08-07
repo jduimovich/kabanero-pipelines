@@ -1,0 +1,99 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: github-jduimovich-champ-config 
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/jduimovich/champ-config.git 
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: github-jduimovich-kdemo-app 
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/jduimovich/kdemo-app.git 
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: github-jduimovich-bigtrout
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/jduimovich/bigtrout.git 
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: github-jduimovich-kdemo-config 
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/jduimovich/kdemo-config.git 
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: demoservice-v1
+spec:
+  type: image
+  params:
+  - name: url
+    value: jduimovich/demoservice-v1
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: demoservice-v2
+spec:
+  type: image
+  params:
+  - name: url
+    value: jduimovich/demoservice-v2
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: config-v1
+spec:
+  type: image
+  params:
+  - name: url
+    value: jduimovich/config-v1
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: latest-bigtrout-image
+spec:
+  type: image
+  params:
+  - name: url
+    value: jduimovich/bigtrout-v1:latest
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: great-url-resource
+spec:
+  type: image
+  params:
+  - name: url
+    value: arbitrary.url.com
+---
+
