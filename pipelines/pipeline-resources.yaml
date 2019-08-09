@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: github-jduimovich-kabanero-pipelines
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/jduimovich/kabanero-pipelines.git 
+    - name: revision
+      value: master
+---
+
