@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: mvn-simple-git-build-push
+  name: maven-docker-build-deploy
 spec:
   resources: 
   - name: git-source
@@ -9,9 +9,9 @@ spec:
   - name: docker-image
     type: image
   tasks:
-  - name: build-simple
+  - name: build
     taskRef:
-      name: mvn-build-push
+      name: maven-docker-build-push
     resources:
       inputs:
       - name: git-source
@@ -20,9 +20,9 @@ spec:
       - name: builtImage
         resource: docker-image
   - name: deploy-simple
-    runAfter: [build-simple]
+    runAfter: [build]
     taskRef: 
-      name: deploy-simple-kubectl-task
+      name: deploy-using-kubectl-task
     resources: 
       inputs:
       - name: git-source

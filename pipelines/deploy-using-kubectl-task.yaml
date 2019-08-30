@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata: 
-  name: deploy-simple-kubectl-task
+  name: deploy-using-kubectl-task
 spec:
   inputs: 
     resources: 
@@ -13,7 +13,7 @@ spec:
   - name: show-image-name
     image: docker.io/ubuntu
     command: ['/bin/bash'] 
-    args: ['-c', 'echo deploy-simple-kubectl-task  $IMG'] 
+    args: ['-c', 'echo deploy-using-kubectl-task  $IMG'] 
     env:
       - name: IMG
         value: ${inputs.resources.image-out.url}
@@ -50,5 +50,5 @@ spec:
       - name: IMAGE
         value: ${inputs.resources.image-out.url}
       - name: DEPLOY
-        value: "/workspace/git-source/"
+        value: "/workspace/git-source/config"
 

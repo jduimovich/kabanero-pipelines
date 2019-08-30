@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: maven-docker-build-push
+spec:
+  inputs:
+    resources:
+      - name: git-source
+        type: git
+    params:
+    - name: pathToDockerFile
+      description: The path to the dockerfile to build
+      default: /workspace/git-source/Dockerfile
+    - name: pathToContext
+      description: The build context used by Kaniko (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
+      default: /workspace/git-source
+  outputs:
+    resources:
+      - name: docker-image
+        type: image
+  steps:
+  - name: run-maven-build
+    image: jduimovich/mavenbuild
+    command: ['bash']
+    args: ['/script.sh']
+  - name: build-push-step
+    image: gcr.io/kaniko-project/executor
+    command:
+      - /kaniko/executor
+    args:
+      - --dockerfile=${inputs.params.pathToDockerFile}
+      - --destination=${outputs.resources.docker-image.url}
+      - --context=${inputs.params.pathToContext}
