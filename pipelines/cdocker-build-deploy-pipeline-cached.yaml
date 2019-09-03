@@ -11,7 +11,7 @@ spec:
   tasks:
   - name: build
     taskRef:
-      name: docker-build-push-cached
+      name: cdocker-build-push-cached
     resources:
       inputs:
       - name: git-source
