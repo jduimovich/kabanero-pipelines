@@ -32,4 +32,4 @@ spec:
         - --destination=${outputs.resources.builtImage.url}
         - --context=${inputs.params.pathToContext}
         - --cache=true 
-        - --cache-repo=127.0.0.1:5000/jduimovich
+        - --cache-repo=9.24.159.185:5000
